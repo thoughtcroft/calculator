@@ -37,7 +37,7 @@ class ViewController: UIViewController {
         case "√": performOperation { sqrt($0) }
         case "sin": performOperation { sin($0) }
         case "cos": performOperation { cos($0) }
-        case "π": display.text = "\(M_PI)"
+        case "π": performOperation(M_PI)
         default: break
         }
     }
@@ -47,7 +47,6 @@ class ViewController: UIViewController {
             appendDigit(sender)
         }
     }
-    
     
     private func performOperation(operation: (Double, Double) -> Double) {
         if operandStack.count >= 2 {
@@ -61,6 +60,11 @@ class ViewController: UIViewController {
             displayValue = operation(operandStack.removeLast())
             enter()
         }
+    }
+    
+    private func performOperation(operation: Double) {
+        displayValue = operation
+        enter()
     }
     
     var operandStack = Array<Double>()
