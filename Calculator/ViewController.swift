@@ -48,6 +48,14 @@ class ViewController: UIViewController {
         }
     }
     
+    @IBAction func reverseSign(sender: UIButton) {
+        if display.text!.hasPrefix("-") {
+            display.text = dropFirst(display.text!)
+        } else {
+            display.text = "-" + display.text!
+        }
+    }
+    
     private func performOperation(operation: (Double, Double) -> Double) {
         if operandStack.count >= 2 {
             displayValue = operation(operandStack.removeLast(), operandStack.removeLast())
