@@ -21,10 +21,12 @@ class ViewController: UIViewController {
     
     @IBAction func operate(sender: UIButton) {
         let operation = sender.currentTitle!
+        if !history.text!.hasSuffix(operation) {
+            history.text = history.text! + operation
+        }
         if userIsInTheMiddleOfTypingNumber {
             enter()
         }
-        addHistory(operation)
         println("operation = \(operation)")
         switch operation {
         case "×": performOperation { $1 * $0 }
@@ -42,6 +44,7 @@ class ViewController: UIViewController {
     private func performOperation(operation: (Double, Double) -> Double) {
         if operandStack.count >= 2 {
             displayValue = operation(operandStack.removeLast(), operandStack.removeLast())
+            history.text = history.text! + "="
             enter()
         }
     }
@@ -64,9 +67,14 @@ class ViewController: UIViewController {
     // adding and removing numbers in the display
     
     @IBAction func enter() {
-        userIsInTheMiddleOfTypingNumber = false
-        addHistory(display.text!)
-        operandStack.append(displayValue)
+        if userIsInTheMiddleOfTypingNumber {
+            if isCharNumeric(getLastChar(history.text)) {
+                history.text = history.text! + "⏎"
+            }
+            userIsInTheMiddleOfTypingNumber = false
+        }
+        history.text = history.text! + display.text!
+        operandStack.append(displayValue!)
         println("operandStack = \(operandStack)")
     }
 
@@ -79,18 +87,6 @@ class ViewController: UIViewController {
             userIsInTheMiddleOfTypingNumber = true
         }
     }
-    
-    @IBAction func removeDigit(sender: UIButton) {
-        if userIsInTheMiddleOfTypingNumber {
-            if count(display.text!) > 1 {
-                display.text = dropLast(display.text!)
-            } else {
-                display.text = "0"
-                userIsInTheMiddleOfTypingNumber = false
-            }
-        }
-    }
-    
     
     @IBAction func appendDecimal(sender: UIButton) {
         if display.text!.rangeOfString(".") == nil {
@@ -106,38 +102,55 @@ class ViewController: UIViewController {
         }
     }
   
-    var displayValue: Double {
-        get {
-            return NSNumberFormatter().numberFromString(display.text!)!.doubleValue
-        }
-        set {
-            display.text = "\(newValue)"
+    @IBAction func clear(sender: UIButton) {
+        if userIsInTheMiddleOfTypingNumber {
+            if count(display.text!) > 1 {
+                display.text = dropLast(display.text!)
+            } else {
+                displayValue = nil
+                userIsInTheMiddleOfTypingNumber = false
+            }
+        } else {
+            displayValue = nil
+            history.text = ""
+            operandStack.removeAll()
             userIsInTheMiddleOfTypingNumber = false
         }
     }
     
-    // manage the history of operands and operations
-    // and how that is updated into the display
+    // manage displays and other useful things
     
-    var historyStack = Array<String>()
-    
-    func addHistory(item: String) {
-        historyStack.append(item)
-        updateHistory()
+    var displayValue: Double? {
+        get {
+            println("display = \(display.text!)")
+            return NSNumberFormatter().numberFromString(display.text!)!.doubleValue
+        }
+        set {
+            if newValue == nil {
+                display.text = "0"
+            } else {
+                display.text = "\(newValue!)"
+            }
+            userIsInTheMiddleOfTypingNumber = false
+        }
     }
     
-    func removeHistory(count: Int) {
-        if count == 0 {
-            historyStack.removeAll()
-        } else {
-            for i in 1...min(count, historyStack.count) {
-                historyStack.removeLast()
+    func getLastChar(text: String?) -> Character? {
+        if text != nil && count(text!) > 0 {
+            if let ch = text![text!.endIndex.predecessor()] as Character? {
+                return ch
             }
         }
-        updateHistory()
+        return nil
     }
     
-    func updateHistory() {
-        history.text = historyStack.reduce("") { $1 + "\n" + $0! }
+    func isCharNumeric(char: Character?) -> Bool {
+        var result = false
+        if char != nil {
+            if let n = String(char!).toInt() {
+                result = true
+            }
+        }
+        return result
     }
 }
