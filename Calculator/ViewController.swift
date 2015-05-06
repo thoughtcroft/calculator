@@ -135,6 +135,7 @@ class ViewController: UIViewController {
         }
     }
     
+
     func getLastChar(text: String?) -> Character? {
         if text != nil && count(text!) > 0 {
             if let ch = text![text!.endIndex.predecessor()] as Character? {
