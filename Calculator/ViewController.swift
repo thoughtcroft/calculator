@@ -15,53 +15,26 @@ class ViewController: UIViewController {
     @IBOutlet weak var history: UILabel!
     
     var userIsInTheMiddleOfTypingNumber = false
+    
+    var brain = CalculatorBrain()
 
     // manage aspects of applying operations to
     // the operands on the stack
     
     @IBAction func operate(sender: UIButton) {
         let operation = sender.currentTitle!
+        if let result = brain.performOperation(operation) {
+            displayValue = result
+        } else {
+            displayValue = nil
+        }
         if !history.text!.hasSuffix(operation) {
             history.text = history.text! + operation
         }
         if userIsInTheMiddleOfTypingNumber {
             enter()
         }
-        println("operation = \(operation)")
-        switch operation {
-        case "×": performOperation { $1 * $0 }
-        case "÷": performOperation { $1 / $0 }
-        case "+": performOperation { $1 + $0 }
-        case "−": performOperation { $1 - $0 }
-        case "√": performOperation { sqrt($0) }
-        case "sin": performOperation { sin($0) }
-        case "cos": performOperation { cos($0) }
-        case "π": performOperation(M_PI)
-        default: break
-        }
     }
-    
-    private func performOperation(operation: (Double, Double) -> Double) {
-        if operandStack.count >= 2 {
-            displayValue = operation(operandStack.removeLast(), operandStack.removeLast())
-            history.text = history.text! + "="
-            enter()
-        }
-    }
-
-    private func performOperation(operation: Double -> Double) {
-        if operandStack.count >= 1 {
-            displayValue = operation(operandStack.removeLast())
-            enter()
-        }
-    }
-    
-    private func performOperation(operation: Double) {
-        displayValue = operation
-        enter()
-    }
-    
-    var operandStack = Array<Double>()
     
     // keys that are not operations but control
     // adding and removing numbers in the display
@@ -74,8 +47,11 @@ class ViewController: UIViewController {
             userIsInTheMiddleOfTypingNumber = false
         }
         history.text = history.text! + display.text!
-        operandStack.append(displayValue!)
-        println("operandStack = \(operandStack)")
+        if let result = brain.pushOperand(displayValue!) {
+            displayValue = result
+        } else {
+            displayValue = nil
+        }
     }
 
     @IBAction func appendDigit(sender: UIButton) {
@@ -113,7 +89,7 @@ class ViewController: UIViewController {
         } else {
             displayValue = nil
             history.text = ""
-            operandStack.removeAll()
+            brain.clearStack()
             userIsInTheMiddleOfTypingNumber = false
         }
     }
