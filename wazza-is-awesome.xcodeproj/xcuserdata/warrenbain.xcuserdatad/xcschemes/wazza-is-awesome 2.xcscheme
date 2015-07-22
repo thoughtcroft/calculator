@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "B15EF469EC0662DE48679E7F"
-               BuildableName = "Quick.framework"
-               BlueprintName = "Pods-CalculatorTests-Quick"
-               ReferencedContainer = "container:Pods.xcodeproj">
+               BlueprintIdentifier = "69070D541AF596ED00EAADAE"
+               BuildableName = "wazza-is-awesome.app"
+               BlueprintName = "wazza-is-awesome"
+               ReferencedContainer = "container:wazza-is-awesome.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -29,6 +29,15 @@
       buildConfiguration = "Debug">
       <Testables>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "69070D541AF596ED00EAADAE"
+            BuildableName = "wazza-is-awesome.app"
+            BlueprintName = "wazza-is-awesome"
+            ReferencedContainer = "container:wazza-is-awesome.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
    </TestAction>
    <LaunchAction
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
@@ -39,6 +48,16 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       allowLocationSimulation = "YES">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "69070D541AF596ED00EAADAE"
+            BuildableName = "wazza-is-awesome.app"
+            BlueprintName = "wazza-is-awesome"
+            ReferencedContainer = "container:wazza-is-awesome.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -48,6 +67,16 @@
       useCustomWorkingDirectory = "NO"
       buildConfiguration = "Release"
       debugDocumentVersioning = "YES">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "69070D541AF596ED00EAADAE"
+            BuildableName = "wazza-is-awesome.app"
+            BlueprintName = "wazza-is-awesome"
+            ReferencedContainer = "container:wazza-is-awesome.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

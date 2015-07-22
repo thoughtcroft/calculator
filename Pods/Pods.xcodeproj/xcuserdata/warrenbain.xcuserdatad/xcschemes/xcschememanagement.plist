@@ -8,31 +8,37 @@
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>2</integer>
 		</dict>
 		<key>Pods-CalculatorTests-Quick.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>3</integer>
 		</dict>
 		<key>Pods-CalculatorTests.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>1</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>3CC04A73C695BBED48AC29AF</key>
+		<key>115C92593D8FDEE55866ED4C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C12601757885CE55B56D384D</key>
+		<key>418475B7CDFB1BA0A947420A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>FA0DB8B4734702FEE7DD375B</key>
+		<key>B15EF469EC0662DE48679E7F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
