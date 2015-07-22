@@ -4,45 +4,23 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Pods-CalculatorTests-Nimble.xcscheme</key>
+		<key>Nimble.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>2</integer>
 		</dict>
-		<key>Pods-CalculatorTests-Quick.xcscheme</key>
+		<key>Pods-wazza-is-awesomeTests.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>3</integer>
 		</dict>
-		<key>Pods-CalculatorTests.xcscheme</key>
+		<key>Quick.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>1</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
-	<dict>
-		<key>115C92593D8FDEE55866ED4C</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>418475B7CDFB1BA0A947420A</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>B15EF469EC0662DE48679E7F</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-	</dict>
+	<dict/>
 </dict>
 </plist>
