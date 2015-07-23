@@ -60,7 +60,7 @@ platform :ios do
     # sh "your_script.sh"
     # You can also use other beta testing services here
     slack(
-      message: "Successfully deployed wazza-is-awesome beta to TestFlight"
+      message: "Successfully deployed wazza-is-awesome beta build #{build_version} to TestFlight"
       )
   end
 
