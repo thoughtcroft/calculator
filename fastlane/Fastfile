@@ -26,8 +26,6 @@ def build_app
 
   cocoapods
 
-  increment_build_number
-
   ENV['PROFILE_UDID'] = sigh
 
   ipa(
@@ -35,16 +33,8 @@ def build_app
     configuration: "Beta"
   )
 
-  clean_build_artifacts
-
   # this is needed to undo the non-deterministic UUID update by cocoapods
   sh "cd .. && git checkout -- Pods/Pods.xcodeproj/"
-
-  commit_version_bump(
-    message: 'Version bump by fastlane'
-  )
-
-  push_to_git_remote
 
 end
 
@@ -70,14 +60,21 @@ platform :ios do
   desc "This will also make sure the profile is up to date"
   lane :beta do
 
+    increment_build_number
+
     build_app
 
     testflight(
       skip_deploy: true
     )
 
-    # sh "your_script.sh"
-    # You can also use other beta testing services here
+    clean_build_artifacts
+
+    commit_version_bump(
+      message: 'Version bump by fastlane'
+    )
+
+    push_to_git_remote
 
     slack(
       message: "Successfully deployed wazza-is-awesome beta build to TestFlight",
