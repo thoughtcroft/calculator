@@ -3,3 +3,4 @@
 *.zip
 fastlane/screenshots
 AppStore*
+report.xml
