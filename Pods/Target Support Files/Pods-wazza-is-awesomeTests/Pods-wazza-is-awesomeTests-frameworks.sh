@@ -51,11 +51,11 @@ code_sign_if_enabled() {
 }
 
 
-if [[ "$CONFIGURATION" == "Release" ]]; then
+if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework 'Pods-wazza-is-awesomeTests/Nimble.framework'
   install_framework 'Pods-wazza-is-awesomeTests/Quick.framework'
 fi
-if [[ "$CONFIGURATION" == "Debug" ]]; then
+if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework 'Pods-wazza-is-awesomeTests/Nimble.framework'
   install_framework 'Pods-wazza-is-awesomeTests/Quick.framework'
 fi
