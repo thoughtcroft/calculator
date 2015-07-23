@@ -22,16 +22,35 @@ fastlane_version "1.3.1"
 
 default_platform :ios
 
+def build_app
+
+  cocoapods
+
+  increment_build_number
+
+  ENV['PROFILE_UDID'] = sigh
+
+  ipa(
+    scheme: "wazza-is-awesome",
+    configuration: "Beta"
+  )
+
+  commit_version_bump(
+    message: 'Version bump by fastlane'
+  )
+
+  push_to_git_remote
+
+end
+
+
+
 platform :ios do
 
   before_all do
     ENV["SLACK_URL"] = "https://hooks.slack.com/services/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"
 
     ensure_git_status_clean
-
-    cocoapods
-
-    increment_build_number
 
     # Build your app - more options available
     # xctool # run the tests of your app
@@ -46,27 +65,20 @@ platform :ios do
   desc "This will also make sure the profile is up to date"
   lane :beta do
 
-    sigh
+    build_app
 
-    # use the UDID of the correct provisioning profile
-    ENV["PROFILE_UDID"] = Actions.lane_context[Actions::SharedValues::SIGH_UDID]
-
-    ipa(
-      scheme: "wazza-is-awesome",
-      configuration: "Beta"
-       )
-
-    deliver(
+    testflight(
       skip_deploy: true,
       beta: true
-      )
+    )
 
     # sh "your_script.sh"
     # You can also use other beta testing services here
 
     slack(
-      message: "Successfully deployed wazza-is-awesome beta build #{build_version} to TestFlight"
-      )
+      message: "Successfully deployed wazza-is-awesome beta build to TestFlight",
+      success: true
+    )
   end
 
   #desc "Deploy a new version to the App Store"
