@@ -26,9 +26,7 @@ def build_app
 
   cocoapods
 
-  sh "git commit -am 'Update cocoapods UUID'"
-
- increment_build_number
+  increment_build_number
 
   ENV['PROFILE_UDID'] = sigh
 
@@ -38,6 +36,9 @@ def build_app
   )
 
   clean_build_artifacts
+
+  # this is needed to undo the non-deterministic UUID update by cocoapods
+  sh "cd .. && git checkout -- Pods/Pods.xcodeproj/"
 
   commit_version_bump(
     message: 'Version bump by fastlane'
