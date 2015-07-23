@@ -46,12 +46,16 @@ platform :ios do
   desc "This will also make sure the profile is up to date"
   lane :beta do
 
-    cert
-    sigh(force: true)
+    sigh
+
+    # use the UDID of the correct provisioning profile
+    ENV["PROFILE_UDID"] = Actions.lane_context[Actions::SharedValues::SIGH_UDID]
+
     ipa(
       scheme: "wazza-is-awesome",
       configuration: "Beta"
        )
+
     deliver(
       skip_deploy: true,
       beta: true
@@ -59,6 +63,7 @@ platform :ios do
 
     # sh "your_script.sh"
     # You can also use other beta testing services here
+
     slack(
       message: "Successfully deployed wazza-is-awesome beta build #{build_version} to TestFlight"
       )
