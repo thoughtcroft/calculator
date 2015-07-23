@@ -4,4 +4,7 @@
    <FileRef
       location = "group:wazza-is-awesome.xcodeproj">
    </FileRef>
+   <FileRef
+      location = "group:Pods/Pods.xcodeproj">
+   </FileRef>
 </Workspace>

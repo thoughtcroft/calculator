@@ -14,6 +14,7 @@
 		69070D711AF596ED00EAADAE /* CalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69070D701AF596ED00EAADAE /* CalculatorTests.swift */; };
 		696D3EFE1B5E03CF00999CB4 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 696D3EFD1B5E03CF00999CB4 /* Media.xcassets */; };
 		69B9121B1B00936200651706 /* CalculatorBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B9121A1B00936200651706 /* CalculatorBrain.swift */; };
+		927479407A4125915C0C5380 /* Pods_wazza_is_awesomeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EA5E1691E3B2B725EC7DC04 /* Pods_wazza_is_awesomeTests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,6 +28,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4EA5E1691E3B2B725EC7DC04 /* Pods_wazza_is_awesomeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_wazza_is_awesomeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		69070D551AF596ED00EAADAE /* wazza-is-awesome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "wazza-is-awesome.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		69070D591AF596ED00EAADAE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		69070D5A1AF596ED00EAADAE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -38,6 +40,8 @@
 		69070D701AF596ED00EAADAE /* CalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorTests.swift; sourceTree = "<group>"; };
 		696D3EFD1B5E03CF00999CB4 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		69B9121A1B00936200651706 /* CalculatorBrain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculatorBrain.swift; sourceTree = "<group>"; };
+		9A166684368D8883B64E6D84 /* Pods-wazza-is-awesomeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wazza-is-awesomeTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-wazza-is-awesomeTests/Pods-wazza-is-awesomeTests.release.xcconfig"; sourceTree = "<group>"; };
+		B8E0819F77B5F702768A7CEC /* Pods-wazza-is-awesomeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wazza-is-awesomeTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-wazza-is-awesomeTests/Pods-wazza-is-awesomeTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				927479407A4125915C0C5380 /* Pods_wazza_is_awesomeTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -61,6 +66,7 @@
 		42981F9D226776758FD478BD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4EA5E1691E3B2B725EC7DC04 /* Pods_wazza_is_awesomeTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -72,6 +78,7 @@
 				69070D6D1AF596ED00EAADAE /* CalculatorTests */,
 				69070D561AF596ED00EAADAE /* Products */,
 				42981F9D226776758FD478BD /* Frameworks */,
+				7FC0D0CBC3A699CC2B7FDC92 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -121,6 +128,15 @@
 				69070D6F1AF596ED00EAADAE /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		7FC0D0CBC3A699CC2B7FDC92 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B8E0819F77B5F702768A7CEC /* Pods-wazza-is-awesomeTests.debug.xcconfig */,
+				9A166684368D8883B64E6D84 /* Pods-wazza-is-awesomeTests.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -436,6 +452,7 @@
 		};
 		69070D781AF596ED00EAADAE /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B8E0819F77B5F702768A7CEC /* Pods-wazza-is-awesomeTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -455,6 +472,7 @@
 		};
 		69070D791AF596ED00EAADAE /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9A166684368D8883B64E6D84 /* Pods-wazza-is-awesomeTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
