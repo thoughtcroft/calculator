@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "6D190F53E1A1F935ABA6BD1B"
+               BlueprintIdentifier = "F41506D5847E9D1A07F2EFB4"
                BuildableName = "Pods_wazza_is_awesomeTests.framework"
                BlueprintName = "Pods-wazza-is-awesomeTests"
                ReferencedContainer = "container:Pods.xcodeproj">
