@@ -27,6 +27,8 @@ platform :ios do
   before_all do
     ENV["SLACK_URL"] = "https://hooks.slack.com/services/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"
 
+    ensure_git_status_clean
+
     cocoapods
 
     increment_build_number
@@ -44,15 +46,22 @@ platform :ios do
   desc "This will also make sure the profile is up to date"
   lane :beta do
 
-    ipa(scheme: "wazza-is-awesome")
-
-    #snapshot
     cert
     sigh(force: true)
-    deliver(beta: true)
+    ipa(
+      scheme: "wazza-is-awesome",
+      configuration: "Beta"
+       )
+    deliver(
+      skip_deploy: true,
+      beta: true
+      )
 
     # sh "your_script.sh"
     # You can also use other beta testing services here
+    slack(
+      message: "Successfully deployed wazza-is-awesome beta to TestFlight"
+      )
   end
 
   #desc "Deploy a new version to the App Store"
@@ -68,9 +77,6 @@ platform :ios do
 
   after_all do |lane|
     # This block is called, only if the executed lane was successful
-     slack(
-       message: "Successfully deployed new App Update."
-     )
   end
 
 
