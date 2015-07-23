@@ -1,5 +1,4 @@
 # vi:syntax=ruby
-
 # Customise this file, documentation can be found here:
 # https://github.com/KrauseFx/fastlane/tree/master/docs
 # All available actions: https://github.com/KrauseFx/fastlane/blob/master/docs/Actions.md
@@ -22,64 +21,42 @@ fastlane_version "1.3.1"
 
 default_platform :ios
 
-def build_app
-
+def build_app(config)
   cocoapods
-
+  cert
   ENV['PROFILE_UDID'] = sigh
 
   ipa(
     scheme: "wazza-is-awesome",
-    configuration: "Beta"
+    configuration: config
   )
 
   # this is needed to undo the non-deterministic UUID update by cocoapods
   sh "cd .. && git checkout -- Pods/Pods.xcodeproj/"
-
 end
 
 
-
 platform :ios do
-
   before_all do
-  ENV["SLACK_URL"] = "https://hooks.slack.com/services/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"
-
+    ENV["SLACK_URL"] = "https://hooks.slack.com/services/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"
     ensure_git_status_clean
-
-    # Build your app - more options available
-    # xctool # run the tests of your app
   end
 
-  #desc "Runs all the tests"
-  #lane :test do
-    #snapshot
-  #end
+  desc "Generate screen captures on all relevant devices"
+  lane :snapshot do
+    snapshot
+  end
 
   desc "Submit a new Beta Build to Apple TestFlight"
   desc "This will also make sure the profile is up to date"
   lane :beta do
-
     increment_build_number
-
-    build_app
-
-    testflight(
-      skip_deploy: true
-    )
-
+    build_app("Beta")
+    testflight(skip_deploy: true)
     clean_build_artifacts
-
-    commit_version_bump(
-      message: 'Version bump by fastlane'
-    )
-
+    commit_version_bump(message: 'Version bump by fastlane')
     push_to_git_remote
-
-    slack(
-      message: "Successfully deployed wazza-is-awesome beta build to TestFlight",
-      success: true
-    )
+    slack(message: "Successfully deployed wazza-is-awesome beta build to TestFlight")
   end
 
   #desc "Deploy a new version to the App Store"
@@ -97,14 +74,12 @@ platform :ios do
     # This block is called, only if the executed lane was successful
   end
 
-
   error do |lane, exception|
      slack(
        message: exception.message,
        success: false
      )
   end
-
 end
 
 

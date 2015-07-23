@@ -26,10 +26,10 @@ function captureLocalizedScreenshot(name) {
   var model = target.model();
   var rect = target.rect();
   var deviceOrientation = target.deviceOrientation();
-  
+
   var theSize = (rect.size.width > rect.size.height) ? rect.size.width.toFixed() : rect.size.height.toFixed();
 
-  if (model.match(/iPhone/)) 
+  if (model.match(/iPhone/))
   {
     if (theSize > 667) {
       model = "iPhone6Plus";
@@ -40,8 +40,8 @@ function captureLocalizedScreenshot(name) {
     } else {
     model = "iPhone4";
     }
-  } 
-  else 
+  }
+  else
   {
     model = "iPad";
   }
