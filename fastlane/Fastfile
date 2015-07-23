@@ -73,8 +73,7 @@ platform :ios do
     build_app
 
     testflight(
-      skip_deploy: true,
-      beta: true
+      skip_deploy: true
     )
 
     # sh "your_script.sh"
