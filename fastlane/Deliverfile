@@ -31,6 +31,7 @@
 # If you want to have even more control, check out the documentation
 # https://github.com/KrauseFx/deliver/blob/master/Deliverfile.md
 
+hide_transporter_output
 
 ###################### Automatically generated ######################
 # Feel free to remove the following lines if you use fastlane
