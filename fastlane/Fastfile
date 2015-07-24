@@ -21,26 +21,29 @@ fastlane_version "1.3.1"
 
 default_platform :ios
 
-def build_app(config)
-  cocoapods
-  cert
-  ENV['PROFILE_UDID'] = sigh
-
-  ipa(
-    scheme: "wazza-is-awesome",
-    configuration: config
-  )
-
-  # this is needed to undo the non-deterministic UUID update by cocoapods
-  sh "cd .. && git checkout -- Pods/Pods.xcodeproj/"
-end
-
 
 platform :ios do
   before_all do
     ENV["SLACK_URL"] = "https://hooks.slack.com/services/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"
     ensure_git_status_clean
   end
+
+  desc "Build and sign the app"
+  private_lane :build_app do |options|
+    cocoapods
+    cert
+    ENV['PROFILE_UDID'] = sigh
+
+    ipa(
+      scheme: "wazza-is-awesome",
+      configuration: options[:config]
+    )
+
+    # this is needed to undo the non-deterministic UUID update by cocoapods
+    sh "cd .. && git checkout -- Pods/Pods.xcodeproj/"
+  end
+
+
 
   desc "Generate screen captures on all relevant devices"
   lane :snapshot do
@@ -49,14 +52,22 @@ platform :ios do
 
   desc "Submit a new Beta Build to Apple TestFlight"
   desc "This will also make sure the profile is up to date"
+  desc "Beta testers will also be notified to download the build"
   lane :beta do
     increment_build_number
-    build_app("Beta")
-    testflight(skip_deploy: true)
+    build_app(config: "Beta")
+
+    testflight
+
     clean_build_artifacts
     commit_version_bump(message: 'Version bump by fastlane')
+
+    build_number = Actions.lane_context[Actions::SharedValues::BUILD_NUMBER]
+    add_git_tag(tag: "testflight-#{build_number}")
+
     push_to_git_remote
-    slack(message: "Successfully deployed wazza-is-awesome beta build to TestFlight")
+
+    slack(message: "Successfully deployed wazza-is-awesome build #{build_number} to TestFlight :rocket:")
   end
 
   #desc "Deploy a new version to the App Store"
