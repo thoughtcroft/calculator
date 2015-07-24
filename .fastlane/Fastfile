@@ -32,7 +32,6 @@ platform :ios do
   desc "Build and sign the app"
   private_lane :build_app do |options|
     cocoapods
-    cert
     ENV['PROFILE_UDID'] = sigh
 
     ipa(
