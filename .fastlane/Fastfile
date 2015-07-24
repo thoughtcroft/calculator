@@ -4,9 +4,6 @@
 # All available actions: https://github.com/KrauseFx/fastlane/blob/master/docs/Actions.md
 # can also be listed using the `fastlane actions` command
 
-# Change the syntax highlighting to Ruby
-# All lines starting with a # are ignored when running `fastlane`
-
 # By default, fastlane will send which actions are used
 # No personal data is shared, more information on https://github.com/fastlane/enhancer
 # Uncomment the following line to opt out
@@ -67,12 +64,11 @@ platform :ios do
     commit_version_bump(message: 'Version bump by fastlane')
 
     build_number = Actions.lane_context[Actions::SharedValues::BUILD_NUMBER]
-    release_id = "v#{version_number} (#{build_number})"
-    add_git_tag(tag: "testflight-#{release_id}")
+    add_git_tag(tag: "testflight-v#{version_number}-b#{build_number}")
 
     push_to_git_remote
 
-    slack(message: "Successfully deployed wazza-is-awesome #{release_id} to TestFlight :rocket:")
+    slack(message: "Deployed wazza-is-awesome v#{version_number} (#{build_number}) to TestFlight :rocket:")
   end
 
 
