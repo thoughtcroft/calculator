@@ -50,6 +50,12 @@ platform :ios do
   end
 
 
+  desc "Submit metadata to iTunes Connect"
+  lane :metadata do
+    deliver(metadata_only: true)
+  end
+
+
   desc "Submit a new Beta Build to Apple TestFlight"
   desc "This will also make sure the profile is up to date"
   desc "Beta testers will also be notified to download the build"
