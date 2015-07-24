@@ -45,8 +45,10 @@ platform :ios do
 
 
   desc "Generate screen captures on all relevant devices"
+  desc "Additionally, add device frame and titles to the screenshots"
   lane :snapshot do
     snapshot
+    frameit
   end
 
 
