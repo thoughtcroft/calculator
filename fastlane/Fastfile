@@ -21,6 +21,10 @@ fastlane_version "1.3.1"
 
 default_platform :ios
 
+def version_number
+  `/usr/libexec/plistbuddy -c Print:CFBundleShortVersionString '../Calculator/Info.plist'`.strip
+end
+
 
 platform :ios do
   before_all do
@@ -44,11 +48,11 @@ platform :ios do
   end
 
 
-
   desc "Generate screen captures on all relevant devices"
   lane :snapshot do
     snapshot
   end
+
 
   desc "Submit a new Beta Build to Apple TestFlight"
   desc "This will also make sure the profile is up to date"
@@ -63,27 +67,29 @@ platform :ios do
     commit_version_bump(message: 'Version bump by fastlane')
 
     build_number = Actions.lane_context[Actions::SharedValues::BUILD_NUMBER]
-    add_git_tag(tag: "testflight-#{build_number}")
+    release_id = "v#{version_number} (#{build_number})"
+    add_git_tag(tag: "testflight-#{release_id}")
 
     push_to_git_remote
 
-    slack(message: "Successfully deployed wazza-is-awesome build #{build_number} to TestFlight :rocket:")
+    slack(message: "Successfully deployed wazza-is-awesome #{release_id} to TestFlight :rocket:")
   end
 
-  #desc "Deploy a new version to the App Store"
-  #desc "** Full Markdown** Support: `code`"
-  #lane :deploy do
+
+  desc "Deploy a new version to the App Store"
+  desc "** Full Markdown** Support: `code`"
+  lane :deploy do
     #snapshot
     #sigh
     #deliver(skip_deploy: true, force: true)
-    ## frameit
-  #end
+    #frameit
+  end
 
-  # You can define as many lanes as you want
 
   after_all do |lane|
     # This block is called, only if the executed lane was successful
   end
+
 
   error do |lane, exception|
      slack(
