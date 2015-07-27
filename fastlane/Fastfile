@@ -38,9 +38,6 @@ platform :ios do
       scheme: "wazza-is-awesome",
       configuration: options[:config]
     )
-
-    # this is needed to undo the non-deterministic UUID update by cocoapods
-    sh "cd .. && git checkout -- Pods/Pods.xcodeproj/"
   end
 
 
