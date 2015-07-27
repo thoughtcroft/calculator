@@ -1,7 +1,10 @@
+DS_Store
+
 *.ipa
 *.cer
 *.zip
 fastlane/screenshots
+/*.itmsp
 AppStore*
 report.xml
 Preview.html
