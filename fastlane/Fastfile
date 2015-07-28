@@ -61,7 +61,7 @@ platform :ios do
   desc "This will also make sure the profile is up to date"
   desc "Beta testers will also be notified to download the build"
   lane :beta do
-    build_number = Time.new.strftime("%Y.%m.%d.%H%M")
+    build_number = Time.new.strftime("%Y%m%d.%H%M")
     increment_build_number(build_number: build_number)
     build_app(config: "Beta")
 
