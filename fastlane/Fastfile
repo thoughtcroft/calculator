@@ -57,6 +57,12 @@ platform :ios do
   end
 
 
+  desc "Update marketing version number"
+  lane :update_version do |options|
+    increment_version_number(version_number: options[:version])
+  end
+
+
   desc "Submit a new Beta Build to Apple TestFlight"
   desc "This will also make sure the profile is up to date"
   desc "Beta testers will also be notified to download the build"
