@@ -59,17 +59,15 @@ platform :ios do
   desc "This will also make sure the profile is up to date"
   desc "Beta testers will also be notified to download the build"
   lane :beta do
-    increment_build_number
+    build_number = Time.new.strftime("%Y.%m.%d.%H%M")
+    increment_build_number(build_number: build_number)
     build_app(config: "Beta")
 
     testflight
 
     clean_build_artifacts
     commit_version_bump(message: 'Version bump by fastlane')
-
-    build_number = Actions.lane_context[Actions::SharedValues::BUILD_NUMBER]
     add_git_tag(tag: "testflight-v#{version_number}-b#{build_number}")
-
     push_to_git_remote
 
     slack(message: "Deployed wazza-is-awesome v#{version_number} (#{build_number}) to TestFlight :rocket:")
