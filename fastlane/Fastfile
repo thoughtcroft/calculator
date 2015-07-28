@@ -26,8 +26,10 @@ end
 platform :ios do
   before_all do
     ENV["SLACK_URL"] = "https://hooks.slack.com/services/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"
+    ENV["SIGH_USERNAME"] = "warren@thoughtcroft.com"
     ensure_git_status_clean
   end
+
 
   desc "Build and sign the app"
   private_lane :build_app do |options|
