@@ -36,15 +36,22 @@ platform :ios do
     cocoapods
     ENV['PROFILE_UDID'] = sigh
 
-    ipa(
-      scheme: "wazza-is-awesome",
-      configuration: options[:config]
+    #ipa(
+      #scheme: "wazza-is-awesome",
+      #configuration: options[:config]
+    #)
+
+    xcbuild(
+      archive: true,
+      scheme: 'wazza-is-awesome',
+      configuration: options[:config],
+      sdk: 'iphoneos'
     )
   end
 
 
   desc "Populate environment variables for beta version"
-  private_lane :beta_metadata do |options|
+  private_lane :get_beta_metadata do |options|
     Dir.glob('metadata/beta/*').each do |file|
       ENV[File.basename(file, '.*').upcase]=File.read(file)
     end
@@ -79,7 +86,7 @@ platform :ios do
     increment_build_number(build_number: build_number)
     build_app(config: "Beta")
 
-    beta_metadata
+    get_beta_metadata
 
     testflight
 
