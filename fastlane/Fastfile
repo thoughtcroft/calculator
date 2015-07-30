@@ -36,17 +36,19 @@ platform :ios do
     cocoapods
     ENV['PROFILE_UDID'] = sigh
 
-    #ipa(
-      #scheme: "wazza-is-awesome",
-      #configuration: options[:config]
-    #)
+    ipa(
+      scheme: 'wazza-is-awesome',
+      configuration: options[:config],
+      workspace: 'wazza-is-awesome.xcworkspace',
+      sdk: 'iphoneos'
+    )
 
-    xctool :archive, [
-      "--workspace", "'wazza-is-awesome.xcworkspace'",
-      "--scheme", "'wazza-is-awesome'",
-      "--configuration", options[:config],
-      "--sdk", 'iphoneos'
-    ].join(' ')
+    #xctool :archive, [
+      #"--workspace", "'wazza-is-awesome.xcworkspace'",
+      #"--scheme", "'wazza-is-awesome'",
+      #"--configuration", options[:config],
+      #"--sdk", 'iphoneos'
+    #].join(' ')
   end
 
 
