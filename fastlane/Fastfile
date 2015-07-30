@@ -40,7 +40,8 @@ platform :ios do
       scheme: 'wazza-is-awesome',
       configuration: options[:config],
       workspace: 'wazza-is-awesome.xcworkspace',
-      sdk: 'iphoneos'
+      sdk: 'iphoneos',
+      archive: false
     )
 
     #xctool :archive, [
