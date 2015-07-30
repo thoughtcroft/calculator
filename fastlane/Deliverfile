@@ -3,10 +3,6 @@
 # If you want to have even more control, check out the documentation
 # https://github.com/KrauseFx/deliver/blob/master/Deliverfile.md
 
-
-$:.unshift File.dirname(__FILE__)
-require 'lib/utils.rb'
-
 default_language "en-US"
 
 hide_transporter_output
