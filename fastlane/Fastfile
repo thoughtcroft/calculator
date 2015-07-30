@@ -42,6 +42,12 @@ platform :ios do
   end
 
 
+  desc "Update the fastlane tools"
+  lane :update_tools do
+    update_fastlane
+  end
+
+
   desc "Generate screen captures on all relevant devices"
   desc "Additionally, add device frame and titles to the screenshots"
   lane :snapshot do
