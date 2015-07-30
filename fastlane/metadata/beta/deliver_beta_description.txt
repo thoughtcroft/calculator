@@ -1,0 +1,1 @@
+This version introduces the calculator history feature.
