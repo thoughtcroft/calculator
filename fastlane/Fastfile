@@ -29,7 +29,7 @@ platform :ios do
     ipa(
       scheme: 'wazza-is-awesome',
       configuration: options[:config],
-      archive: !!config[:archive]
+      archive: !!options[:archive]
     )
   end
 
