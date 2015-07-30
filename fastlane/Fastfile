@@ -4,16 +4,6 @@
 # All available actions: https://github.com/KrauseFx/fastlane/blob/master/docs/Actions.md
 # can also be listed using the `fastlane actions` command
 
-# By default, fastlane will send which actions are used
-# No personal data is shared, more information on https://github.com/fastlane/enhancer
-# Uncomment the following line to opt out
-# opt_out_usage
-
-# If you want to automatically update fastlane if a new version is available:
-# update_fastlane
-
-# This is the minimum version number required.
-# Update this, if you use features of a newer version
 fastlane_version "1.3.1"
 
 default_platform :ios
@@ -39,17 +29,8 @@ platform :ios do
     ipa(
       scheme: 'wazza-is-awesome',
       configuration: options[:config],
-      workspace: 'wazza-is-awesome.xcworkspace',
-      sdk: 'iphoneos',
-      archive: false
+      archive: !!config[:archive]
     )
-
-    #xctool :archive, [
-      #"--workspace", "'wazza-is-awesome.xcworkspace'",
-      #"--scheme", "'wazza-is-awesome'",
-      #"--configuration", options[:config],
-      #"--sdk", 'iphoneos'
-    #].join(' ')
   end
 
 
@@ -95,7 +76,7 @@ platform :ios do
 
     clean_build_artifacts
     commit_version_bump(message: 'Version bump by fastlane')
-    add_git_tag(tag: "testflight-v#{version_number}-b#{build_number}")
+    add_git_tag(tag: "testflight-v#{version_number}-#{build_number}")
     push_to_git_remote
 
     slack(message: "Deployed wazza-is-awesome v#{version_number} (#{build_number}) to TestFlight :rocket:")
@@ -124,7 +105,6 @@ platform :ios do
      )
   end
 end
-
 
 # More information about multiple platforms in fastlane:
 # https://github.com/KrauseFx/fastlane/blob/master/docs/Platforms.md
