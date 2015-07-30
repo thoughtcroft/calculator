@@ -41,12 +41,12 @@ platform :ios do
       #configuration: options[:config]
     #)
 
-    xcbuild(
-      archive: true,
-      scheme: 'wazza-is-awesome',
-      configuration: options[:config],
-      sdk: 'iphoneos'
-    )
+    xctool :archive, [
+      "--workspace", "'wazza-is-awesome.xcworkspace'",
+      "--scheme", "'wazza-is-awesome'",
+      "--configuration", options[:config],
+      "--sdk", 'iphoneos'
+    ].join(' ')
   end
 
 
