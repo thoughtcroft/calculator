@@ -98,7 +98,7 @@ platform :ios do
     clean_build_artifacts
 
     commit_version_bump(message: 'Build version bump by fastlane')
-    add_git_tag(tag: "testflight-v#{iget_version_number}-#{get_build_number}")
+    add_git_tag(tag: "testflight-v#{get_version_number}-#{get_build_number}")
     push_to_git_remote
 
     slack(message: "Deployed wazza-is-awesome v#{get_version_number} (#{get_build_number}) to TestFlight :rocket:")
