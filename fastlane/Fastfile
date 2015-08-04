@@ -43,7 +43,7 @@ platform :ios do
 
 
   desc "Update the fastlane tools"
-  lane :update_tools do
+  lane :upgrade do
     update_fastlane
   end
 
