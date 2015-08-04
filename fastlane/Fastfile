@@ -76,10 +76,10 @@ platform :ios do
   end
 
 
-  desc "Update marketing version and commit to repo"
+  desc "Update marketing version"
   lane :update_version do |options|
     increment_version_number(version_number: options[:version])
-    commit_changes(message: 'Marketing version bump by fastlane')
+    #commit_changes(message: 'Marketing version bump by fastlane')
   end
 
 
