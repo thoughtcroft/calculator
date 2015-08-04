@@ -1,16 +1,13 @@
 # vi:syntax=ruby
 # Customise this file, documentation can be found here:
 # https://github.com/KrauseFx/fastlane/tree/master/docs
-# All available actions: https://github.com/KrauseFx/fastlane/blob/master/docs/Actions.md
-# can also be listed using the `fastlane actions` command
+
+$:.unshift File.dirname(__FILE__)
+require 'lib/utils.rb'
 
 fastlane_version "1.13.1"
 
 default_platform :ios
-
-def version_number
-  `/usr/libexec/plistbuddy -c Print:CFBundleShortVersionString '../Calculator/Info.plist'`.strip
-end
 
 
 platform :ios do
@@ -21,9 +18,13 @@ platform :ios do
   end
 
 
+## Private Lanes ##
+
+
   desc "Build and sign the app"
   private_lane :build_app do |options|
     cocoapods
+
     ENV['PROFILE_UDID'] = sigh
 
     ipa(
@@ -42,7 +43,20 @@ platform :ios do
   end
 
 
-  desc "Update the fastlane tools"
+  desc "Commit changes with tag and message to the repo"
+  private_lane :commit_changes do |options|
+    # don't commit any intermediate files or cruft
+    clean_build_artifacts
+    commit_version_bump(message: options[:message] || 'Changes committed by fastlane')
+    add_git_tag(tag: options[:tag]) if options[:tag]
+    push_to_git_remote
+  end
+
+
+## Public Lanes ##
+
+
+  desc "Upgrade the fastlane toolset to latest versions"
   lane :upgrade do
     update_fastlane
   end
@@ -62,9 +76,10 @@ platform :ios do
   end
 
 
-  desc "Update marketing version number"
+  desc "Update marketing version and commit to repo"
   lane :update_version do |options|
     increment_version_number(version_number: options[:version])
+    commit_changes(message: 'Marketing version bump by fastlane')
   end
 
 
@@ -72,8 +87,8 @@ platform :ios do
   desc "This will also make sure the profile is up to date"
   desc "Beta testers will also be notified to download the build"
   lane :beta do
-    build_number = Time.new.strftime("%Y%m%d.%H%M")
-    increment_build_number(build_number: build_number)
+    increment_build_number(build_number: generate_build_number)
+
     build_app(config: "Beta")
 
     get_beta_metadata
@@ -81,11 +96,12 @@ platform :ios do
     testflight
 
     clean_build_artifacts
-    commit_version_bump(message: 'Version bump by fastlane')
-    add_git_tag(tag: "testflight-v#{version_number}-#{build_number}")
+
+    commit_version_bump(message: 'Build version bump by fastlane')
+    add_git_tag(tag: "testflight-v#{iget_version_number}-#{get_build_number}")
     push_to_git_remote
 
-    slack(message: "Deployed wazza-is-awesome v#{version_number} (#{build_number}) to TestFlight :rocket:")
+    slack(message: "Deployed wazza-is-awesome v#{get_version_number} (#{get_build_number}) to TestFlight :rocket:")
   end
 
 
