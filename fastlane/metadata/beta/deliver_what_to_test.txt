@@ -1,2 +1,3 @@
-Calculator works
+Calculations are correct
 History is accurate
+sin, cos, π buttons work
