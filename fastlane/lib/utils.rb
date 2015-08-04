@@ -14,5 +14,5 @@ def get_plist_key(key, path)
 end
 
 def generate_build_number
-    Time.new.strftime("%Y%m%d.%H%M")
+    Time.new.strftime("%Y%m%d%H%M%S")
 end
